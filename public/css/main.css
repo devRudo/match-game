@@ -1,0 +1,133 @@
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+body{
+    background: linear-gradient(to bottom, #232435, #234352) no-repeat;
+}
+
+.grid-container {
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-items: center;
+    grid-gap: 20px;
+}
+
+.grid-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    text-shadow: 0 2px 10px rgba(255,255,255, 0.9);
+    width: 150px;
+    height: 200px;
+    box-shadow: 0 0 2px rgba(255,255,255, 0.6);
+    cursor: pointer;
+}
+
+.grid-item.show.plus::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f067';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.bookmark::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f02e';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.heart::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f004';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.circle::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f111';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.file::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f15b';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.calendar::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f133';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.play::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f04b';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.square::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f0c8';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.cloud::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f0c2';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+.grid-item.show.comment::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '\f075';
+    font-family: FontAwesome;
+    width: 40px;
+    height: 40px;
+}
+
+

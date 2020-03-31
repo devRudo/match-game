@@ -15,6 +15,9 @@ if (config.NODE_ENV !== 'production') {
 // Creating new express server instance
 const app = express();
 
+// Serving static files
+app.use(express.static(path.join(cwd, '/public')));
+
 // setting middleware view engine
 app.set('views', viewsDirectory);
 app.set('view engine', 'ejs');
