@@ -48,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let finalCards = document.getElementsByClassName('grid-item');
     let matchedCards = document.getElementsByClassName('matched');
     let openCards = [];
+    // Adding click event handlers for each card
     for (let i = 0; i < finalCards.length; i++) {
         finalCards[i].addEventListener('click', (event) => {
             event.target.classList.toggle('rotate');
@@ -56,6 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
             checkOpenCards(event);
         });
     }
+
+    // checking the open cards to be matching and non-matching
     let checkOpenCards = (event) => {
         openCards.push(event.target);
         if (openCards.length === 2) {
@@ -68,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // what to do if open cards do not match
     let notMatched = () => {
         disableAll();
         setTimeout(() => {
@@ -78,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
+    // what to do if open cards match
     let matched = () => {
         openCards[0].classList.add('disable', 'matched');
         openCards[1].classList.add('disable', 'matched');
@@ -85,12 +90,14 @@ document.addEventListener('DOMContentLoaded', () => {
         openCards = [];
     }
 
+    // function to disable click events on cards
     let disableAll = () => {
         for (let i = 0; i < finalCards.length; i++) {
             finalCards[i].classList.add('disable');
         }
     }
 
+    // function to enable click events on cards
     let enableAll = () => {
         for (let i = 0; i < cards.length; i++) {
             finalCards[i].classList.remove('disable');
