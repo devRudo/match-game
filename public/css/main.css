@@ -30,6 +30,86 @@ body{
     cursor: pointer;
 }
 
+.grid-item.sea {
+    background-color: #16a085;
+}
+
+.grid-item.emerald {
+    background-color: #2ecc71;
+}
+
+.grid-item.river {
+    background-color: #3498db;
+}
+
+.grid-item.wisteria {
+    background-color: #8e44ad;
+}
+
+.grid-item.asphalt {
+    background-color: #34495e;
+}
+
+.grid-item.orange {
+    background-color: #f39c12;
+}
+
+.grid-item.carrot {
+    background-color: #e67e22;
+}
+
+.grid-item.pumpkin {
+    background-color: #d35400;
+}
+
+.grid-item.pomegranate {
+    background-color: #c0392b;
+}
+
+.grid-item.silver {
+    background-color: #7f8c8d;
+}
+
+.grid-item.livid {
+    background-color: #6a89cc;
+}
+
+.grid-item.green {
+    background-color: #b8e994;
+}
+
+.grid-item.red {
+    background-color: #b71540;
+}
+
+.grid-item.blue {
+    background-color: #0a3d62;
+}
+
+.grid-item.cream {
+    background-color: #f8c291;
+}
+
+.grid-item.yellow {
+    background-color: #f6b93b;
+}
+
+.grid-item.primer {
+    background-color: #222f3e;
+}
+
+.grid-item.purple {
+    background-color: #341f97;
+}
+
+.grid-item.pink {
+    background-color: #f368e0;
+}
+
+.grid-item.gray {
+    background-color: #4b4b4b;
+}
+
 .grid-item.show.plus::before {
     display: flex;
     justify-content: center;
@@ -130,4 +210,28 @@ body{
     height: 40px;
 }
 
+.disable {
+    pointer-events: none;
+}
 
+.grid-item.matched.show::before {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: 'Matched';
+    font-size: 30px;
+    color: white;
+}
+
+.rotate {
+    animation: flip 0.5s linear;
+}
+
+@keyframes flip{
+    from{
+        transform: rotateY(0);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}

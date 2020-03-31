@@ -1,52 +1,103 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // To create cards with different colors and different shapes
+    let generateTiles = () => {
+        let colorClasses = ['sea', 'emerald', 'river', 'wisteria', 'asphalt', 'orange', 'carrot', 'pumpkin', 'pomegranate', 'silver', 'livid', 'green', 'red', 'blue', 'cream', 'yellow', 'primer', 'purple', 'pink', 'gray'];
+        let shapeClasses = ['bookmark', 'heart', 'circle', 'file', 'calendar', 'play', 'square', 'plus', 'cloud', 'comment'];
+        let randomColor = () => {
+            return Math.floor(Math.random() * colorClasses.length);
+        }
+        let cards = [];
+        for (let i = 0; i < colorClasses.length; i++) {
+            let div = document.createElement('div');
+            div.classList.add('grid-item');
+            div.classList.add(colorClasses[randomColor()]);
+            if (i > 9) {
+                div.classList.add(shapeClasses[i - 10]);
+                div.setAttribute("type", shapeClasses[i - 10]);
+            }
+            else {
+                div.classList.add(shapeClasses[i]);
+                div.setAttribute("type", shapeClasses[i]);
+            }
+            cards.push(div);
+        }
+
+        return cards;
+    }
 
     let cards = generateTiles();
+
+    // To shuffle the positions of cards on start
+    let randomiseCards = (cards) => {
+        let game_div = document.getElementById('game');
+        let maxIndex = cards.length;
+        let temp;
+        while (maxIndex !== 0) {
+            let randomIndex = Math.floor(Math.random() * maxIndex);
+            maxIndex -= 1;
+            temp = cards[maxIndex];
+            cards[maxIndex] = cards[randomIndex];
+            cards[randomIndex] = temp;
+        }
+        for (let i = 0; i < cards.length; i++) {
+            game_div.appendChild(cards[i]);
+        }
+    }
     randomiseCards(cards);
-    for (let i = 0; i < cards.length; i++) {
-        cards[i].classList.add('show');
+
+    let finalCards = document.getElementsByClassName('grid-item');
+    let matchedCards = document.getElementsByClassName('matched');
+    let openCards = [];
+    for (let i = 0; i < finalCards.length; i++) {
+        finalCards[i].addEventListener('click', (event) => {
+            event.target.classList.toggle('rotate');
+            event.target.classList.toggle('show');
+            event.target.classList.toggle('disable');
+            checkOpenCards(event);
+        });
+    }
+    let checkOpenCards = (event) => {
+        openCards.push(event.target);
+        if (openCards.length === 2) {
+            if (openCards[0].getAttribute("type") === openCards[1].getAttribute("type")) {
+                matched();
+            }
+            else {
+                notMatched();
+            }
+        }
+    }
+
+    let notMatched = () => {
+        disableAll();
+        setTimeout(() => {
+            openCards[0].classList.remove('show', 'disable', 'rotate');
+            openCards[1].classList.remove('show', 'disable', 'rotate');
+            openCards = [];
+            enableAll();
+        }, 1000);
+    }
+
+    let matched = () => {
+        openCards[0].classList.add('disable', 'matched');
+        openCards[1].classList.add('disable', 'matched');
+        enableAll();
+        openCards = [];
+    }
+
+    let disableAll = () => {
+        for (let i = 0; i < finalCards.length; i++) {
+            finalCards[i].classList.add('disable');
+        }
+    }
+
+    let enableAll = () => {
+        for (let i = 0; i < cards.length; i++) {
+            finalCards[i].classList.remove('disable');
+        }
+        for (let i = 0; i < matchedCards.length; i++) {
+            matchedCards[i].classList.add('disable');
+        }
     }
 });
 
-// To create cards with different colors and different shapes
-let generateTiles = () => {
-    let colors = ['#55efc4', '#81ecec', '#74b9ff', '#a29bfe', '#dfe6e9', '#00b894', '#00cec9', '#0984e3', '#6c5ce7', '#b2bec3', '#ffeaa7', '#fab1a0', '#ff7675', '#fd79a8', '#636e72', '#fdcb6e', '#e17055', '#d63031', '#e84393', '#2d3436'];
-    let shapeClasses = ['bookmark', 'heart', 'circle', 'file', 'calendar', 'play', 'square', 'plus', 'cloud', 'comment'];
-    let randomColor = () => {
-        return Math.floor(Math.random() * colors.length);
-    }
-    let cards = [];
-    for (let i = 0; i < colors.length; i++) {
-        let div = document.createElement('div');
-        div.classList.add('grid-item');
-        if (i > 9) {
-            div.classList.add(shapeClasses[i - 10]);
-        }
-        else {
-            div.classList.add(shapeClasses[i]);
-        }
-        div.style.backgroundColor = colors[randomColor()];
-        cards.push(div);
-    }
-
-    return cards;
-}
-
-// To shuffle the positions of cards on start
-let randomiseCards = (cards) => {
-    let game_div = document.getElementById('game');
-    let maxIndex = cards.length;
-    let temp;
-    while (maxIndex !== 0) {
-        let randomIndex = Math.floor(Math.random() * maxIndex);
-        maxIndex -= 1;
-        temp = cards[maxIndex];
-        cards[maxIndex] = cards[randomIndex];
-        cards[randomIndex] = temp;
-    }
-    for (let i = 0; i < cards.length; i++) {
-        game_div.appendChild(cards[i]);
-        cards[i].addEventListener('click', (event) => {
-            event.target.classList.toggle('show');
-        });
-    }
-}
