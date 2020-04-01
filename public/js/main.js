@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
             checkOpenCards(event);
             countFlips();
             if (matchedCards.length === finalCards.length) {
-                game_started = false;
                 gameFinished();
             }
         });
@@ -122,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let start = document.getElementById('start');
     let reset = document.getElementById('reset');
     let timeElapsed = document.getElementById('time-elapsed');
+    let options1 = document.getElementsByClassName('options1')[0];
+    let alertDiv = document.getElementById('alert');
     let timer;
     let count = 1;
     disableAll();
@@ -134,6 +135,10 @@ document.addEventListener('DOMContentLoaded', () => {
             enableAll();
             start.classList.add('disable');
             reset.classList.add('disable');
+            options1.classList.remove('hide');
+            alertDiv.classList.add('info');
+            alertDiv.classList.remove('error');
+            alertDiv.innerHTML = "****** Game Started ******";
         }
     });
 
@@ -143,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let gameFinished = () => {
         disableAll();
-        game_started = false;
         popupResult();
         stopTimer();
         let resultTime = document.getElementById('result-time');
@@ -151,24 +155,27 @@ document.addEventListener('DOMContentLoaded', () => {
         resultTime.innerText = count;
         resultFlips.innerText = flips;
         reset.classList.remove('disable');
-        document.getElementById('bestscore-value').innerText = flips;
         scoreInLocalStorage(flips);
+        reset.classList.remove('hide');
+        alertDiv.innerHTML = "****** Game Finished! Please click on Replay to play again ******";
     }
 
     let popupResult = () => {
         let result = document.getElementById('result');
         result.classList.remove('hide');
+        result.classList.add('show');
+
     }
 
     let scoreInLocalStorage = (flips) => {
         let localStorage = window.localStorage;
         let bestScore = localStorage.getItem('bestscore');
-        if (bestScore || Number(bestScore) > flips) {
+        if (!bestScore || Number(bestScore) > flips) {
             localStorage.setItem('bestscore', flips);
         }
     }
     let printBestScore = () => {
-        let best = localStorage.getItem('bestscore');
+        let best = localStorage.getItem('bestscore') || 0;
         let bestValue = document.getElementById('bestscore-value');
         bestValue.innerText = best;
     }
@@ -178,4 +185,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let stopTimer = () => {
         clearInterval(timer);
     }
+    document.addEventListener('click', () => {
+        if (!game_started) {
+            alertDiv.classList.add('error');
+            alertDiv.innerHTML = "<p>Please start the game by clicking on start game button</p>";
+        }
+    });
 });

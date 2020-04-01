@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Dosis&display=swap');
 
 *,
 *::before,
@@ -8,20 +9,64 @@
 
 body{
     background: linear-gradient(to bottom, #232435, #234352) no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Dosis', sans-serif;
+}
+
+#alert {
+    align-self: center;
+    padding: 20px;
+    display: flex;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#alert.error {
+    color: white;
+    background: rgba(184,59,64,0.8);
+}
+
+#alert.error::before{
+    content: '\f071';
+    font-family: FontAwesome;
+    margin-right: 10px;
+}
+
+#alert.info {
+    color: white;
+    background: #4ccc8d;
+}
+
+.game-title {
+    color: white;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .gamebar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 50px;
 }
 
 .options {
     display: flex;
-    color: white;
 }
 
 .options div{
+    margin-right: 30px;
+}
+
+.options1 {
+    display: flex;
+}
+
+.options1 div{
     margin-right: 30px;
 }
 
@@ -29,7 +74,9 @@ body{
     padding: 10px 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: darkslategray;
+    background: white;
+    font-size: 20px;
+    color: darkslategray;
 }
 
 .buttons button {
@@ -37,9 +84,10 @@ body{
     padding: 10px 20px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-size: 20px;
     border: none;
-    background: darkslategray;
-    color: white;
+    background: white;
+    color: darkslategray;
     cursor: pointer;
 }
 
@@ -65,7 +113,7 @@ body{
     text-shadow: 0 2px 10px rgba(255,255,255, 0.9);
     width: 150px;
     height: 200px;
-    box-shadow: 0 0 2px rgba(255,255,255, 0.6);
+    box-shadow: 0 0 8px rgba(0,0,0, 0.8);
     cursor: pointer;
 }
 
@@ -285,18 +333,162 @@ body{
     }
 }
 
-.hide {
-    display: none;
-}
-
 #result {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 30px;
-    background: white;
     padding: 20px;
+    align-items: center;
     border-radius: 20px;
     box-shadow: 0 0 100px rgba(0,0,0,0.9);
+    animation : change 5s ease-in-out infinite;
+}
+
+@keyframes change {
+    0%{
+        background: white;
+        color: #343a40;
+    }
+    25% {
+        background: #343a40;
+        color: white;
+    }
+    50% {
+        background: #6e747a;
+        color: white;
+    }
+    100% {
+        background: #a4a8ac;
+        color: #343a40;
+    }
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+@media screen and (max-width:1440px){
+    .gamebar {
+        padding: 20px 30px;
+    }
+    .grid-container {
+        padding: 20px;
+        grid-gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    .grid-item {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+    }
+    .grid-item.matched.show::after{
+        font-size: 18px;
+    }
+
+    .time,.score,.flips,.bestscore{
+        font-size: 16px;
+    }
+
+    .buttons button {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 875px){
+    .gamebar {
+        padding: 10px 20px;
+    }
+
+    .grid-container {
+        padding: 10px;
+        grid-gap: 10px;
+    }
+
+    #alert {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .options div{
+        margin-right: 10px;
+    }
+
+    .options1 div{
+        margin-right: 10px;
+    }
+
+    .time,.score,.flips,.bestscore{
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .buttons button {
+        padding: 5px 10px;
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    #result {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 475px){
+    .game-title {
+        margin-top: 10px;
+        font-size: 20px;
+    }
+
+    .gamebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+        grid-template-rows: repeat(2, minmax(40px, 1fr));
+    }
+
+    .options {
+        grid-row: 1/2;
+        grid-column: 1/2;
+    }
+
+    .options div{
+        margin-right: 10px;
+    }
+
+    .options1 {
+        grid-row: 2/3;
+        grid-column: 1/2;
+        justify-self: start;
+    }
+
+    .options1 div{
+        margin-right: 10px;
+    }
+
+    .time,.score,.flips,.bestscore{
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .buttons {
+        grid-row: 1/2;
+        grid-column: 2/3;
+        justify-self: end;
+    }
+
+    .buttons button {
+        padding: 5px 10px;
+        font-size: 14px;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
+    #result {
+        font-size: 20px;
+    }
 }

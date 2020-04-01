@@ -10,15 +10,19 @@
 </head>
 
 <body>
+    <h1 class="game-title">Work with your memory || Match the tiles</h1>
+    <div id="alert"></div>
     <div class="gamebar">
         <div class="options">
-            <div class="time">Time : <span id="time-elapsed">0</span></div>
-            <div class="flips">Flips : <span id="flips-count">0</span></div>
             <div class="bestscore">Best : <span id="bestscore-value">0</span></div>
         </div>
+        <div class="options1 hide">
+            <div class="time">Time : <span id="time-elapsed">0</span></div>
+            <div class="flips">Flips : <span id="flips-count">0</span></div>
+        </div>
         <div class="buttons">
-            <button id="start">Start</button>
-            <button id="reset">Reset</button>
+            <button id="start">Start Game</button>
+            <button id="reset" class="hide">Replay</button>
         </div>
     </div>
     <div id="game" class="grid-container">
