@@ -10,6 +10,44 @@ body{
     background: linear-gradient(to bottom, #232435, #234352) no-repeat;
 }
 
+.gamebar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+}
+
+.options {
+    display: flex;
+    color: white;
+}
+
+.options div{
+    margin-right: 30px;
+}
+
+.time,.score,.flips,.bestscore {
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: darkslategray;
+}
+
+.buttons button {
+    margin-left: 30px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    background: darkslategray;
+    color: white;
+    cursor: pointer;
+}
+
+.buttons button:hover{
+    background: white;
+    color: darkslategray;
+}
+
 .grid-container {
     padding: 40px;
     display: grid;
@@ -245,4 +283,20 @@ body{
     to {
         transform: rotateY(360deg);
     }
+}
+
+.hide {
+    display: none;
+}
+
+#result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 100px rgba(0,0,0,0.9);
 }

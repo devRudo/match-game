@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    let game_started = false;
     // To create cards with different colors and different shapes
     let generateTiles = () => {
         let colorClasses = ['sea', 'emerald', 'river', 'wisteria', 'asphalt', 'orange', 'carrot', 'pumpkin', 'pomegranate', 'silver', 'livid', 'green', 'red', 'blue', 'cream', 'yellow', 'primer', 'purple', 'pink', 'gray'];
@@ -55,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.classList.toggle('show');
             event.target.classList.toggle('disable');
             checkOpenCards(event);
+            countFlips();
+            if (matchedCards.length === finalCards.length) {
+                game_started = false;
+                gameFinished();
+            }
         });
     }
 
@@ -106,5 +112,70 @@ document.addEventListener('DOMContentLoaded', () => {
             matchedCards[i].classList.add('disable');
         }
     }
-});
+    let flips = 0;
+    let countFlips = () => {
+        let flipsCount = document.getElementById('flips-count');
+        flips++;
+        flipsCount.innerText = flips;
+    }
 
+    let start = document.getElementById('start');
+    let reset = document.getElementById('reset');
+    let timeElapsed = document.getElementById('time-elapsed');
+    let timer;
+    let count = 1;
+    disableAll();
+    start.addEventListener('click', () => {
+        if (!game_started) {
+            game_started = true;
+            timer = setInterval(() => {
+                timeElapsed.innerText = count++;
+            }, 1000);
+            enableAll();
+            start.classList.add('disable');
+            reset.classList.add('disable');
+        }
+    });
+
+    reset.addEventListener('click', () => {
+        location.reload();
+    });
+
+    let gameFinished = () => {
+        disableAll();
+        game_started = false;
+        popupResult();
+        stopTimer();
+        let resultTime = document.getElementById('result-time');
+        let resultFlips = document.getElementById('total-flips');
+        resultTime.innerText = count;
+        resultFlips.innerText = flips;
+        reset.classList.remove('disable');
+        document.getElementById('bestscore-value').innerText = flips;
+        scoreInLocalStorage(flips);
+    }
+
+    let popupResult = () => {
+        let result = document.getElementById('result');
+        result.classList.remove('hide');
+    }
+
+    let scoreInLocalStorage = (flips) => {
+        let localStorage = window.localStorage;
+        let bestScore = localStorage.getItem('bestscore');
+        if (bestScore || Number(bestScore) > flips) {
+            localStorage.setItem('bestscore', flips);
+        }
+    }
+    let printBestScore = () => {
+        let best = localStorage.getItem('bestscore');
+        let bestValue = document.getElementById('bestscore-value');
+        bestValue.innerText = best;
+    }
+
+    printBestScore();
+
+    let stopTimer = () => {
+        clearInterval(timer);
+    }
+});
