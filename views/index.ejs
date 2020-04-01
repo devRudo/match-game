@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Match Game using JS DOM Manipulation</title>
     <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/css/main.css">
 </head>
 
 <body>
+    <div id="countdown"></div>
     <h1 class="game-title">Work with your memory || Match the tiles</h1>
     <div id="alert"></div>
     <div class="gamebar">
@@ -17,7 +19,7 @@
             <div class="bestscore">Best : <span id="bestscore-value">0</span></div>
         </div>
         <div class="options1 hide">
-            <div class="time">Time : <span id="time-elapsed">0</span></div>
+            <div class="time">Time : <span id="time-elapsed">0 min:00 sec</span></div>
             <div class="flips">Flips : <span id="flips-count">0</span></div>
         </div>
         <div class="buttons">
@@ -28,9 +30,9 @@
     <div id="game" class="grid-container">
     </div>
     <div id="result" class="hide">
-        <p>Congratulations ! You have matched all the cards in <span id="total-flips">0</span> flips and in <span id="result-time">0</span> Seconds</p>
+        <p>Congratulations ! You have matched all the cards in <span id="total-flips">0</span> flips and in <span id="result-time">0</span></p>
     </div>
-    <script src="https://kit.fontawesome.com/077358db92.js" crossorigin="anonymous"></script>
+    <script src="/js/all.min.js"></script>
     <script src="/js/main.js"></script>
 </body>
 

@@ -124,13 +124,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let options1 = document.getElementsByClassName('options1')[0];
     let alertDiv = document.getElementById('alert');
     let timer;
-    let count = 1;
+    let seconds = 0;
+    let minutes = 0;
     disableAll();
     start.addEventListener('click', () => {
         if (!game_started) {
             game_started = true;
             timer = setInterval(() => {
-                timeElapsed.innerText = count++;
+                seconds++;
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                if (seconds === 60) {
+                    seconds = 0;
+                    minutes += 1;
+                }
+                timeElapsed.innerText = minutes + " min : " + seconds + " sec";
             }, 1000);
             enableAll();
             start.classList.add('disable');
@@ -152,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopTimer();
         let resultTime = document.getElementById('result-time');
         let resultFlips = document.getElementById('total-flips');
-        resultTime.innerText = count;
+        resultTime.innerText = minutes + " minutes and " + seconds + " seconds";
         resultFlips.innerText = flips;
         reset.classList.remove('disable');
         scoreInLocalStorage(flips);

@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.13.0",
     "body-parser": "^1.19.0",
     "dotenv-extended": "^2.8.0",
     "ejs": "^3.0.2",
